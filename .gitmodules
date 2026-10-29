@@ -1,0 +1,5 @@
+[submodule "ai-framework"]
+	path = ai-framework
+	url = https://gitlab.com/cmarzian91/AI_Framework.git
+	branch = main
+	update = checkout
