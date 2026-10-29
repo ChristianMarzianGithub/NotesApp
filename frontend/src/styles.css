@@ -1,0 +1,487 @@
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #292e2b;
+  background: #faf9f6;
+  font-synthesis: none;
+  font-size: 14px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #477a61;
+  outline-offset: 3px;
+}
+button {
+  transition: background 0.15s;
+}
+button:hover {
+  filter: brightness(0.97);
+}
+.workspace {
+  display: flex;
+  height: 100dvh;
+  min-height: 440px;
+}
+aside {
+  width: 300px;
+  flex-shrink: 0;
+  background: #f0efe9;
+  border-right: 1px solid #dedfd6;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 18px 18px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px 32px;
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -0.6px;
+}
+.brand small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1.8px;
+  color: #7a8177;
+  margin-top: 7px;
+  font-weight: 500;
+}
+.brand-icon {
+  background: #294b3b;
+  color: #fff;
+  border-radius: 10px;
+  width: 38px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, serif;
+  font-size: 28px;
+}
+.brand-icon span {
+  color: #b4cda6;
+}
+.new-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: 0;
+  border-radius: 7px;
+  background: #31563f;
+  color: #fff;
+  padding: 13px 16px;
+  font-weight: 550;
+  box-shadow: 0 3px 5px #294b3b12;
+}
+.new-note span {
+  font-size: 20px;
+}
+.new-note kbd {
+  margin-left: auto;
+  opacity: 0.65;
+  font-size: 18px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0 26px;
+  padding: 9px 10px;
+  border: 1px solid #d8dcd1;
+  border-radius: 6px;
+  background: #faf9f6;
+  color: #7d857b;
+}
+.search span {
+  font-size: 22px;
+  line-height: 1;
+}
+.search input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  color: #363d32;
+  outline-offset: 4px;
+}
+.list-heading {
+  display: flex;
+  justify-content: space-between;
+  color: #757c70;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 1.5px;
+  padding: 0 10px 12px;
+}
+.list-heading span:last-child {
+  letter-spacing: 0;
+  background: #e2e5da;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+nav {
+  overflow-y: auto;
+  flex: 1;
+}
+.note-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 15px 13px;
+  margin-bottom: 6px;
+  background: transparent;
+  color: #454b40;
+}
+.note-card.selected {
+  background: #e2e8da;
+  border-color: #d3ddc8;
+  box-shadow: inset 3px 0 #527448;
+}
+.note-card strong {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  font-weight: 600;
+}
+.note-card p {
+  font-size: 12px;
+  color: #7e8577;
+  margin: 8px 0 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.note-card time {
+  font-size: 10px;
+  color: #8c9286;
+}
+.list-message {
+  font-size: 13px;
+  color: #727b6a;
+  line-height: 1.7;
+  padding: 10px;
+}
+.sidebar-footer {
+  font-size: 10px;
+  color: #6b7465;
+  border-top: 1px solid #dfe1d7;
+  padding: 19px 9px 0;
+  margin-top: 12px;
+}
+.sidebar-footer small {
+  display: block;
+  font-size: 9px;
+  color: #969c8e;
+  padding: 8px 13px;
+}
+.local-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: #658850;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fdfcf9;
+}
+.toolbar {
+  height: 70px;
+  min-height: 70px;
+  border-bottom: 1px solid #eeeee7;
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  gap: 15px;
+}
+.breadcrumb {
+  color: #92978d;
+  font-size: 11px;
+}
+.breadcrumb span {
+  padding: 0 12px;
+  color: #c5c9be;
+}
+.toolbar-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+}
+.toolbar button {
+  background: none;
+  border: 1px solid #e1e3d9;
+  padding: 7px 10px;
+  border-radius: 5px;
+  color: #687260;
+  font-size: 11px;
+}
+.toolbar .delete {
+  color: #956b60;
+  border-color: transparent;
+}
+.back {
+  display: none;
+}
+.editor-content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  padding: 40px max(30px, calc((100% - 820px) / 2)) 0;
+}
+.document-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #999f92;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  margin: 8px 0 34px;
+}
+.document-meta [role="status"] {
+  letter-spacing: 0.2px;
+  font-size: 11px;
+}
+.saved {
+  color: #749062;
+}
+.title-input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  letter-spacing: -1px;
+  color: #333c2e;
+  padding: 0;
+  line-height: 1.4;
+}
+.title-input::placeholder {
+  color: #aaafa2;
+}
+.modified {
+  font-size: 10px;
+  color: #a0a696;
+  border-bottom: 1px solid #eaece3;
+  padding: 13px 0 25px;
+  margin-bottom: 22px;
+}
+textarea {
+  resize: none;
+  width: 100%;
+  min-height: 150px;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: #50594a;
+  font-size: 15px;
+  line-height: 1.9;
+  padding: 0 3px 24px;
+  tab-size: 4;
+  overflow-wrap: anywhere;
+}
+textarea::placeholder {
+  color: #b2b7aa;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 9px;
+  color: #a4aa9c;
+  border-top: 1px solid #eeeee7;
+  padding: 15px 0;
+  flex-shrink: 0;
+}
+.welcome {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 35px;
+}
+.paper-icon {
+  width: 76px;
+  height: 84px;
+  background: #edf0e5;
+  border: 1px solid #dce3d0;
+  border-radius: 12px;
+  color: #6e865c;
+  font-size: 46px;
+  display: grid;
+  place-items: center;
+  transform: rotate(-7deg);
+  margin-bottom: 32px;
+}
+.eyebrow {
+  font-size: 9px !important;
+  letter-spacing: 2.1px;
+  color: #8f9c80 !important;
+  margin: 0 0 17px !important;
+}
+.welcome h1 {
+  font:
+    42px/1.2 Georgia,
+    serif;
+  letter-spacing: -1.4px;
+  margin: 0 0 22px;
+  color: #3f4c35;
+}
+.welcome p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #8d9683;
+}
+.welcome button {
+  background: #35553b;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 12px 19px;
+  margin: 20px 0 21px;
+  font-size: 12px;
+}
+.welcome small {
+  font-size: 9px;
+  color: #b0b6a7;
+}
+.error {
+  background: #fff0e8;
+  border: 1px solid #edcfc0;
+  border-radius: 5px;
+  color: #8d4230;
+  font-size: 12px;
+  padding: 12px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+.error button {
+  color: inherit;
+  border: 1px solid #cba893;
+  background: transparent;
+  border-radius: 3px;
+  margin-left: 8px;
+}
+.global-error {
+  margin: 15px 25px;
+}
+.back {
+  display: none;
+}
+@media (min-width: 1500px) {
+  aside {
+    width: 320px;
+  }
+}
+@media (max-width: 700px) {
+  .workspace {
+    min-height: 0;
+  }
+  aside {
+    width: 100%;
+    border: 0;
+    padding: 24px 20px 14px;
+  }
+  .brand {
+    padding-bottom: 24px;
+  }
+  .workspace main {
+    display: none;
+  }
+  .workspace.has-selection aside {
+    display: none;
+  }
+  .workspace.has-selection main {
+    display: flex;
+    width: 100%;
+  }
+  .toolbar {
+    padding: 0 16px;
+    height: 59px;
+    min-height: 59px;
+  }
+  .toolbar .back {
+    display: block;
+  }
+  .breadcrumb {
+    display: none;
+  }
+  .toolbar button {
+    padding: 10px 9px;
+    min-height: 40px;
+  }
+  .toolbar-actions {
+    gap: 2px;
+  }
+  .editor-content {
+    padding: 20px 22px 0;
+  }
+  .document-meta {
+    margin: 8px 0 24px;
+  }
+  .title-input {
+    font-size: 30px;
+  }
+  .modified {
+    line-height: 1.6;
+    padding-bottom: 19px;
+  }
+  textarea {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .note-card {
+    padding: 18px 15px;
+  }
+  footer {
+    font-size: 8px;
+  }
+  .new-note {
+    min-height: 48px;
+  }
+  .welcome h1 {
+    font-size: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

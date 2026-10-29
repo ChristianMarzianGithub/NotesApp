@@ -7,12 +7,17 @@ GitLab `cmarzian91-group/notesapp` is its downstream mirror. Preserve
 `.github/workflows/sync-gitlab.yml` and its synchronization behavior. Do not push
 directly to the GitLab mirror or modify the shared framework repository.
 
-This repository currently contains framework integration only. No application
-stack, build, runtime, or test suite has been installed. Do not implement the
-application unless a future task requests it, and do not report application tests
-as passing. Use the existing isolated checkout; do not create a Git worktree
-unless the user explicitly requests one. Use a feature branch and a pull request
-for changes; never automatically merge.
+## Stack and scope
+
+NotesApp is a local, single-user plain-text notes MVP: Java 25, Spring Boot
+3.5.16, Maven, Spring Web/Data JPA/Validation, PostgreSQL 17, Flyway, React 19,
+TypeScript 7 and Vite 8. No authentication: never expose it publicly without
+appropriate access controls. See `docs/product-brief.md` and
+`docs/architecture.md` for acceptance criteria and boundaries.
+
+Use the existing isolated checkout; do not create a Git worktree unless explicitly
+requested. Develop on a feature branch and use GitHub pull requests; never
+merge automatically. Preserve the GitHub-to-GitLab synchronization workflow.
 
 ## Load the shared framework explicitly
 
@@ -60,7 +65,32 @@ changes and keep credentials out of files and logs. Follow the shared workflow:
 define acceptance criteria, inspect and select skills, implement and document,
 verify, review as appropriate, and report evidence and limitations.
 
-For this integration, run from the repository root:
+## Build and test
+
+Use Java 25 and Maven 3.9+, Node 24 and npm, and Docker Compose v2. From the root:
+
+```bash
+docker compose up --build -d --wait
+docker compose -f docker-compose.test.yml up -d --wait
+cd backend && mvn -B verify
+cd ../frontend && npm ci && npm test && npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+The backend tests delete test data; they default to the isolated `notesapp_test`
+database on port 55432. Never use a database containing real notes. Override only
+with `TEST_DATABASE_URL`, `TEST_DATABASE_USER`, and `TEST_DATABASE_PASSWORD`.
+Frontend tests use Vitest/Testing Library; browser tests exercise the real Compose
+stack on port 3000. `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` selects an installed
+Chromium when browser downloads are unavailable. Production schema changes must
+use new Flyway migrations; Hibernate only validates. API changes use DTOs,
+validated limits, UTC timestamps, and optimistic-lock versions. Keep browser
+saves serialized and preserve drafts on failures. Maintain accessible labels,
+keyboard controls, and narrow-screen behavior. Do not introduce rich text or
+extra services without a concrete requirement.
+
+For framework integrity, run from the repository root:
 
 ```bash
 git diff --check
@@ -72,5 +102,4 @@ git diff HEAD -- .github/workflows/sync-gitlab.yml
 
 Expect a mode `160000` gitlink, a clean submodule at the recorded revision, and
 no synchronization-workflow changes. Check documentation links and inspect the
-complete diff. When application code is introduced, document its actual stack
-and verified setup, build, lint, and test commands here.
+complete diff. Keep the actual setup and validation commands current as the application evolves.
