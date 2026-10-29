@@ -44,4 +44,4 @@ jobs:
           export GIT_ASKPASS="$RUNNER_TEMP/git-askpass.sh"
           export GIT_TERMINAL_PROMPT=0
 
-          git push --force https://gitlab.com/cmarzian91-group/notesapp.git HEAD:refs/heads/main
+          git push https://gitlab.com/cmarzian91-group/notesapp.git HEAD:refs/heads/main
