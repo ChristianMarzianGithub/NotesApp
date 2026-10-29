@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: notesapp
+      POSTGRES_USER: notesapp
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-notesapp_dev_only}
+    volumes:
+      - notes-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U notesapp -d notesapp']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/notesapp
+      DATABASE_USER: notesapp
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-notesapp_dev_only}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, java, -cp, /app/health, dev.notesapp.HealthCheck]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 30s
+  frontend:
+    build: ./frontend
+    ports:
+      - '127.0.0.1:${WEB_PORT:-3000}:8080'
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD-SHELL, 'wget -Y off -q -O /dev/null http://127.0.0.1:8080/health || exit 1']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  notes-data:

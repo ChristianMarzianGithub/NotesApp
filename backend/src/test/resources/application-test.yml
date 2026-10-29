@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: ${TEST_DATABASE_URL:jdbc:postgresql://localhost:55432/notesapp_test}
+    username: ${TEST_DATABASE_USER:notesapp}
+    password: ${TEST_DATABASE_PASSWORD:notesapp_dev_only}
