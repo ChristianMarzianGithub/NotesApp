@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql:///${DATABASE_NAME:notesapp}?cloudSqlInstance=${CLOUD_SQL_CONNECTION_NAME}&socketFactory=com.google.cloud.sql.postgres.SocketFactory&cloudSqlRefreshStrategy=lazy&ipTypes=PUBLIC
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 0

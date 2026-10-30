@@ -1,0 +1,9 @@
+# Local gateway smoke tests only; this is not a Cloud Run deployment manifest.
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.cloudrun
+    environment:
+      BACKEND_URL: http://backend:8080
+      BACKEND_AUTH_MODE: none

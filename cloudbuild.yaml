@@ -1,0 +1,21 @@
+# Select this file in the repository build trigger, instead of /Dockerfile.
+steps:
+  - id: backend
+    name: gcr.io/cloud-builders/docker
+    env: [DOCKER_BUILDKIT=1]
+    waitFor: ['-']
+    args: [build, -f, backend/Dockerfile, -t, '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/notesapp-backend:$BUILD_ID', backend]
+  - id: frontend
+    name: gcr.io/cloud-builders/docker
+    env: [DOCKER_BUILDKIT=1]
+    waitFor: ['-']
+    args: [build, -f, frontend/Dockerfile.cloudrun, -t, '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/notesapp-frontend:$BUILD_ID', frontend]
+images:
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/notesapp-backend:$BUILD_ID'
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/notesapp-frontend:$BUILD_ID'
+substitutions:
+  _REGION: europe-west1
+  _REPOSITORY: cloud-run-source-deploy
+options:
+  logging: CLOUD_LOGGING_ONLY
+# Builds and pushes images only. Deployment is a separate manual action.

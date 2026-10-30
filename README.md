@@ -244,3 +244,12 @@ unchanged. `.gitlab-ci.yml` provides optional mirror-side backend/frontend check
 its Docker job runs only when `RUN_DOCKER_BUILDS=true` on a runner configured for
 TLS Docker-in-Docker. Neither pipeline deploys or changes repository settings.
 Remote CI results must be checked separately from local validation.
+
+
+## Google Cloud Run
+
+See [Cloud Run deployment](docs/cloud-run.md) for the corrected Cloud Build trigger,
+separate container builds, private service authentication, Cloud SQL, and manual
+migration/deployment steps for `lexical-lock-472810-g9` in `europe-west1`.
+Select `/cloudbuild.yaml` in the build trigger; Docker Compose is for local use.
+The guide does not make the unauthenticated MVP public.
