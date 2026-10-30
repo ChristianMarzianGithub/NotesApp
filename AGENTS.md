@@ -103,3 +103,15 @@ git diff HEAD -- .github/workflows/sync-gitlab.yml
 Expect a mode `160000` gitlink, a clean submodule at the recorded revision, and
 no synchronization-workflow changes. Check documentation links and inspect the
 complete diff. Keep the actual setup and validation commands current as the application evolves.
+
+## Cloud Run configuration
+
+Read `docs/cloud-run.md` before deployment changes. `cloudbuild.yaml` builds images
+only with explicit BuildKit and per-component contexts. The Cloud Run frontend
+uses `frontend/Dockerfile.cloudrun` and `server.mjs`; local Compose retains nginx.
+Run `npm run test:gateway` from frontend and
+`python3 -m unittest discover -s scripts/tests -v` from root for deployment changes.
+Do not execute `scripts/deploy-cloud-run.sh` as a validation command: it mutates
+Google Cloud resources and requires explicit deployment authorization. Never
+make the shared-notes MVP publicly invocable. Keep credentials in Secret Manager
+and backend identity tokens server-side.
